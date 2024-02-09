@@ -1,27 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:wght@300;500;600;700&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
-
+html,
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  font-family: "Montserrat Alternates", sans-serif;
+  overflow-x: hidden;
+}
+
+.swiper-slide-active .test {
+  background: #fe9200;
+}
+
+.swiper-pagination {
+  z-index: 99 !important;
+  position: absolute;
+  bottom: 5rem !important;
+  left: 6rem;
+  display: flex;
+  column-gap: 12px;
+  align-items: baseline;
+}
+
+.swiper-pagination-bullet {
+  width: 2.5rem !important;
+  height: 0.25rem !important;
+  background: #B9B9B9 !important;
+  border-radius: 0 !important;
+  transition-duration: 200ms;
+}
+
+.swiper-pagination-bullet-active{
+  height: 7px !important;
+  background: #FE9200 !important; 
 }
