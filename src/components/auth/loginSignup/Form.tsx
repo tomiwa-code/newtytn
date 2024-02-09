@@ -80,11 +80,7 @@ const Form = (props: { viewType: string }) => {
   return (
     <>
       {authRes.status ? (
-        <LoginCheck
-          isEmailExist={false}
-          isSuccess={false}
-          token={authRes.token}
-        />
+        <LoginCheck token={authRes.token} />
       ) : (
         <>
           <button

@@ -8,11 +8,7 @@ import { ROUTES } from "@/utils/tytnRoutes";
 import Cookies from "js-cookie";
 import { Puff } from "react-loader-spinner";
 
-const LoginCheck = (props: {
-  isSuccess: boolean;
-  isEmailExist: boolean;
-  token: any;
-}) => {
+const LoginCheck = (props: { token: string }) => {
   // USE STATES
   const [checkRes, setCheckRes] = useState({
     isLoading: false,
@@ -49,10 +45,13 @@ const LoginCheck = (props: {
           router.push(ROUTES.ONBOARDING);
         }, 1200);
       } else {
-        Cookies.set("token", props.token, { expires: 3 });
-        setTimeout(() => {
-          router.push(ROUTES.HOME);
-        }, 1200);
+        console.log(res);
+        
+        // Cookies.set("_Ga_TTYDI", props.token, { expires: 3 });
+        // Cookies.set("_inEdGGolIs", "true");
+        // setTimeout(() => {
+        //   router.push(ROUTES.HOME);
+        // }, 1200);
       }
     } catch (error: any) {
       setCheckRes({
@@ -108,16 +107,6 @@ const LoginCheck = (props: {
             <p>One moment</p>
           </div>
         )
-      )}
-
-      {props.isSuccess && props.isEmailExist && (
-        <div>
-          <p>Headline</p>
-          <p>User with this email already exists</p>
-          <p>
-            Try with different email. <Link href={"/auth"}>Yes</Link>
-          </p>
-        </div>
       )}
     </div>
   );

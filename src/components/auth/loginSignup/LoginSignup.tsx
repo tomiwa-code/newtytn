@@ -5,11 +5,14 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import { useSearchParams } from "next/navigation";
 import LoginCheck from "./LoginCheck";
+import Link from "next/link";
+import Image from "next/image";
 
 const LoginSignUp = () => {
   // USE STATES
   const [toggleAuth, setToggleAuth] = useState(false);
   const [renderCheck, setRenderCheck] = useState(false);
+  const [userExist, setUserExit] = useState("");
 
   // DECLARES
   const searchParam = useSearchParams();
@@ -24,36 +27,69 @@ const LoginSignUp = () => {
 
   // USE EFFECTS
   useEffect(() => {
-    if (isSuccess || isEmailExist || token) {
+    if (token) {
       setRenderCheck(true);
     } else {
       setRenderCheck(false);
     }
-  }, [isSuccess, isEmailExist, token]);
+  }, [token]);
+
+  useEffect(() => {
+    if (isEmailExist && isSuccess) {
+      setUserExit("true");
+    } else {
+      setUserExit("false");
+    }
+  }, [isEmailExist, isSuccess]);
 
   return (
     <div className="w-full h-screen flex relative">
+      {/* Overlay toggle  */}
       <ToggleOverlay
         toggleAuth={toggleAuth}
         handleAuthToggle={handleAuthToggle}
       />
 
+      {/* Sign up  */}
       <div className="w-1/2 h-screen flex items-center justify-center relative">
-        {!renderCheck && (
+        {!renderCheck && userExist === "false" && (
           <SignUp handleAuthToggle={handleAuthToggle} toggleAuth={toggleAuth} />
         )}
       </div>
 
+      {/* Login and User already exist */}
       <div className="w-1/2 h-screen flex items-center justify-center relative">
-        {renderCheck && (
-          <LoginCheck
-            isSuccess={isSuccess}
-            isEmailExist={isEmailExist}
-            token={token}
-          />
+        {renderCheck && userExist === "false" && (
+          <LoginCheck token={token ? token : ""} />
         )}
 
-        {!renderCheck && (
+        {userExist === "true" && (
+          <div className="flex-col gap-y-4 flex items-center justify-center">
+            <div className="w-[200px]">
+              <Image
+                src={
+                  "https://res.cloudinary.com/dgdoymhtj/image/upload/v1707505998/tytn/announcements/Man_Sorry_Vector_Hd_Images__Sorry_Sorry_Sorry_Cartoon_Man__Cartoon_Clipart__Man_Clipart__Very_Sorry_PNG_Image_For_Free_Download__1_-removebg-preview_qhxxuq.png"
+                }
+                alt="sorry"
+                width={1000}
+                height={1000}
+                priority={true}
+              />
+            </div>
+            <p className="text-lg text-center font-medium">
+              User with this email already exists
+            </p>
+            <p className="text-sm">Try with different email.</p>
+            <Link
+              className="text-sm text-center bg-darkOrange text-white px-8 rounded-md py-3"
+              href={"/auth"}
+            >
+              Try again
+            </Link>
+          </div>
+        )}
+
+        {!renderCheck && userExist === "false" && (
           <Login handleAuthToggle={handleAuthToggle} toggleAuth={toggleAuth} />
         )}
       </div>
