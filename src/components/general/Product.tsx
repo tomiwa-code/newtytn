@@ -3,24 +3,23 @@ import Link from "next/link";
 import React from "react";
 import { BsHeart } from "react-icons/bs";
 
-const Product = (props: { link: string; text: string }) => {
+interface IProductProps {
+  link: string;
+  text: string | null;
+}
+
+const Product: React.FC<IProductProps> = ({ link, text }) => {
   return (
-    <div className="w-[200px] relative">
-      {props.text !== "" && (
+    <div className="w-[200px] relative rounded-md overflow-hidden">
+      {text && (
         <div className="absolute rounded bg-princetonOrange p-1 text-xs text-semiWhite capitalize top-0 right-0">
-          {props.text}
+          {text}
         </div>
       )}
 
       <div className="w-full h-[230px] overflow-hidden">
-        <Link href={"#"}>
-          <Image
-            src={props.link}
-            alt="fimg"
-            width={1000}
-            height={1000}
-            priority
-          />
+        <Link href={`/shop_product/productname`}>
+          <Image src={link} alt="fimg" width={1000} height={1000} priority />
         </Link>
       </div>
       <div className="flex justify-between pt-5">

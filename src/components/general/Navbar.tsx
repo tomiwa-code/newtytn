@@ -78,7 +78,7 @@ const Navbar = () => {
       {/* Links  */}
       <div className="flex items-center justify-center gap-x-20 w-1/2">
         <Link
-          href={"#"}
+          href={"/"}
           className={`text-xs tracking-[0.2em] text-black uppercase ${
             pathname === "/"
               ? "text-princetonOrange font-semibold"
@@ -88,7 +88,7 @@ const Navbar = () => {
           home
         </Link>
         <Link
-          href={"#"}
+          href={"/shop"}
           className={`text-xs tracking-[0.2em] text-black uppercase ${
             pathname === "/shop"
               ? "text-princetonOrange font-semibold"
@@ -98,7 +98,7 @@ const Navbar = () => {
           shop
         </Link>
         <Link
-          href={"#"}
+          href={"/contact"}
           className={`text-xs tracking-[0.2em] text-black uppercase ${
             pathname === "/contact"
               ? "text-princetonOrange font-semibold"

@@ -26,7 +26,7 @@ const TopCategories = () => {
         <div className="w-[70%] flex gap-x-1 h-[400px]">
           <div className="w-1/2 flex gap-x-1">
             {/* sweatshirt  */}
-            <Link href={"#"} className="w-full h-full space-y-1">
+            <Link href={"/shop?cat=sweatshirt"} className="w-full h-full space-y-1">
               <motion.div
                 variants={cateAnime}
                 initial="initial"
@@ -66,8 +66,9 @@ const TopCategories = () => {
                 </p>
               </motion.div>
             </Link>
+
             {/* short  */}
-            <Link href={"#"} className="w-full h-full overflow-hidden relative">
+            <Link href={"/shop?cat=short"} className="w-full h-full overflow-hidden relative">
               <motion.div
                 variants={cateAnime}
                 initial="initial"
@@ -103,7 +104,7 @@ const TopCategories = () => {
 
           <div className="w-1/2 space-y-1">
             {/* t-shirt  */}
-            <Link href={"#"} className="flex gap-x-1 h-[50%]">
+            <Link href={"/shop?cat=t-shirt"} className="flex gap-x-1 h-[50%]">
               <motion.div
                 variants={cateAnime}
                 initial="initial"
@@ -143,8 +144,9 @@ const TopCategories = () => {
                 </p>
               </motion.div>
             </Link>
+            
             {/* joggers  */}
-            <Link href={"#"} className="flex gap-x-1 h-[49%]">
+            <Link href={"/shop?cat=joggers"} className="flex gap-x-1 h-[49%]">
               <motion.div
                 variants={cateAnime}
                 initial="initial"
