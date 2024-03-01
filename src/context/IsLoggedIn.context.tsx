@@ -29,6 +29,16 @@ export const UserLoggedInProvider = ({
     }
   }, [isLoggedIn, token]);
 
+  React.useEffect(() => {
+    const recentPath = !!Cookies.get("athpaslt");
+    const recentPathUsed = Cookies.get("_seudathpaslt") === "true";
+
+    if (recentPath && recentPathUsed) {
+      Cookies.remove("athpaslt");
+      Cookies.remove("_seudathpaslt");
+    }
+  }, []);
+
   return (
     <UserLoggedInContext.Provider value={{ isUSerLoggedIn }}>
       {children}

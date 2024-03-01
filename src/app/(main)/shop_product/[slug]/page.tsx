@@ -7,6 +7,9 @@ import { GrSecure } from "react-icons/gr";
 import { TbTruckReturn } from "react-icons/tb";
 import GoodsForYou from "@/components/general/GoodsForYou";
 import Image from "next/image";
+import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
+import { UserLoggedInContext } from "@/context/IsLoggedIn.context";
 
 interface ISoloProductProps {}
 
@@ -45,6 +48,13 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
     imageUrl: string;
   }>(productImages[0]);
 
+  // DECLARES
+  const sizeArr = ["m", "l", "xl"];
+  const colorArr = ["purple", "green", "pink", "blue "];
+  const getCurrentUrl = usePathname();
+  const router = useRouter();
+  const { isUSerLoggedIn } = React.useContext(UserLoggedInContext);
+
   // FUNCTIONS
   const handleQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const quan = Number(e.target.value);
@@ -73,9 +83,17 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
     setActiveImg({ id, imageUrl });
   };
 
-  // ARRAY
-  const sizeArr = ["m", "l", "xl"];
-  const colorArr = ["purple", "green", "pink", "blue "];
+  const handleBuyNow = () => {
+    // check if user is logged in
+    if (isUSerLoggedIn === true) {
+      console.log("user is logged in");
+    } else {
+      if (getCurrentUrl) {
+        Cookies.set("athpaslt", getCurrentUrl);
+        router.push("/auth");
+      }
+    }
+  };
 
   return (
     <div className="bg-semiWhite">
@@ -99,6 +117,7 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
                   <div
                     className="w-[150px] rounded-md h-[150px] bg-semiWhite overflow-hidden cursor-pointer"
                     onClick={() => handleImageChange(id, imageUrl)}
+                    key={id}
                   >
                     <Image
                       src={imageUrl}
@@ -221,7 +240,10 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
               <BsCart2 />
               <p>add to cart</p>
             </button>
-            <button className="w-[130px] hover:bg-black hover:border-none hover:text-semiWhite duration-300 rounded-md py-3 flex gap-x-2 items-center justify-center text-sm border border-gray-400 text-center capitalize">
+            <button
+              className="w-[130px] hover:bg-black hover:border-none hover:text-semiWhite duration-300 rounded-md py-3 flex gap-x-2 items-center justify-center text-sm border border-gray-400 text-center capitalize"
+              onClick={handleBuyNow}
+            >
               <HiOutlineShoppingBag />
               <p>buy now</p>
             </button>

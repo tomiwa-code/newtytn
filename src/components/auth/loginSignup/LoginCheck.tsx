@@ -45,13 +45,22 @@ const LoginCheck = (props: { token: string }) => {
           router.push(ROUTES.ONBOARDING);
         }, 1200);
       } else {
-        console.log(res);
-        
-        // Cookies.set("_Ga_TTYDI", props.token, { expires: 3 });
-        // Cookies.set("_inEdGGolIs", "true");
-        // setTimeout(() => {
-        //   router.push(ROUTES.HOME);
-        // }, 1200);
+        Cookies.set("_Ga_TTYDI", props.token, { expires: 3 });
+        Cookies.set("_inEdGGolIs", "true");
+
+        // check for the last url before redirect
+        const chkRedirect = Cookies.get("athpaslt");
+
+        if (chkRedirect) {
+          setTimeout(() => {
+            router.push(chkRedirect);
+          }, 1200);
+          Cookies.set("_seudathpaslt", "true");
+        } else {
+          setTimeout(() => {
+            router.push(ROUTES.HOME);
+          }, 1200);
+        }
       }
     } catch (error: any) {
       setCheckRes({
