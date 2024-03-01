@@ -9,7 +9,7 @@ const AuthProtected = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     if (isUSerLoggedIn === true) {
-      router.back();
+      router.back()
     }
   }, [isUSerLoggedIn]);
 
