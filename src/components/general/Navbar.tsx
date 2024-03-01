@@ -2,47 +2,29 @@
 import Image from "next/image";
 import Logo from "public/tytn.png";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { LuUser2 } from "react-icons/lu";
 import { GoSearch } from "react-icons/go";
 import { LiaTimesSolid } from "react-icons/lia";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Tooltip from "./Tooltip";
 import { useAnimate, usePresence } from "framer-motion";
+import { UserLoggedInContext } from "@/context/IsLoggedIn.context";
+import Cookies from "js-cookie";
 
 const Navbar = () => {
+  // USE STATES
   const [iconExpand, setIconExpand] = useState(false);
+
+  // DECLARES
   const pathname = usePathname();
   const [isPresent, safeToRemove] = usePresence();
   const [scope, animate] = useAnimate();
+  const { isUSerLoggedIn } = useContext(UserLoggedInContext);
+  const router = useRouter();
 
-  useEffect(() => {
-    if (isPresent) {
-      const enterAnimation = async () => {
-        await animate(scope.current, { opacity: 0, y: -50 });
-        await animate(
-          scope.current,
-          { opacity: 1, y: 0 },
-          {
-            type: "spring",
-            stiffness: 120,
-            damping: 3,
-            mass: 0.4
-
-          }
-        );
-      };
-      enterAnimation();
-    } else {
-      const exitAnimation = async () => {
-        await animate(scope.current, { opacity: 0, y: -50 });
-        safeToRemove();
-      };
-      exitAnimation();
-    }
-  }, [isPresent]);
-
+  // FUNCTIONS
   const toggleExpandOff = () => {
     setIconExpand(false);
   };
@@ -58,18 +40,50 @@ const Navbar = () => {
 
   const handleCart = () => {
     if (iconExpand) {
-      console.log("cart");
+      router.push("/cart");
     }
   };
 
   const handleUser = () => {
     if (iconExpand) {
-      console.log("user");
+      if (isUSerLoggedIn === false) {
+        Cookies.set("athpaslt", pathname);
+        router.push("/auth");
+      }
     }
   };
 
+  // USE EFFECTS
+  useEffect(() => {
+    if (isPresent) {
+      const enterAnimation = async () => {
+        await animate(scope.current, { opacity: 0, y: -50 });
+        await animate(
+          scope.current,
+          { opacity: 1, y: 0 },
+          {
+            type: "spring",
+            stiffness: 120,
+            damping: 3,
+            mass: 0.4,
+          }
+        );
+      };
+      enterAnimation();
+    } else {
+      const exitAnimation = async () => {
+        await animate(scope.current, { opacity: 0, y: -50 });
+        safeToRemove();
+      };
+      exitAnimation();
+    }
+  }, [isPresent]);
+
   return (
-    <div ref={scope} className="opacity-0 absolute py-8 top-5 z-[90] px-20 flex items-center justify-between w-full">
+    <div
+      ref={scope}
+      className="opacity-0 absolute py-8 top-5 z-[90] px-20 flex items-center justify-between w-full"
+    >
       {/* Logo  */}
       <Link href={"#"} className="w-[50px]">
         <Image src={Logo} alt="logo" width={40} height={40} priority />
@@ -133,6 +147,13 @@ const Navbar = () => {
             } text-white`}
             onClick={handleCart}
           >
+            <span
+              className={`${
+                iconExpand ? "w-3 h-3 text-[9px]" : "w-2 h-2"
+              } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute left-5 top-1`}
+            >
+              {iconExpand && 1}
+            </span>
             <Tooltip text="Cart">
               <HiOutlineShoppingBag />
             </Tooltip>
@@ -143,6 +164,9 @@ const Navbar = () => {
               className={`rounded-full w-8 h-8 flex items-center justify-center absolute left-16 text-lg text-white`}
               onClick={handleUser}
             >
+              {isUSerLoggedIn === true && (
+                <span className="w-2 h-2 bg-wheelOrange rounded-full absolute left-5 top-1"></span>
+              )}
               <Tooltip text="Profile">
                 <LuUser2 />
               </Tooltip>
