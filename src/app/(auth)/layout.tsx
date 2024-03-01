@@ -1,4 +1,6 @@
+import { UserLoggedInProvider } from "@/context/IsLoggedIn.context";
 import "../globals.css";
+import AuthProtected from "@/components/auth/AuthProtected";
 
 export const metadata = {
   title: "Next.js",
@@ -13,7 +15,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="relative w-full">{children}</div>
+        <div className="relative w-full">
+          <UserLoggedInProvider>
+            <AuthProtected>{children}</AuthProtected>
+          </UserLoggedInProvider>
+        </div>
       </body>
     </html>
   );
