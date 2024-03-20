@@ -12,6 +12,7 @@ import Tooltip from "./Tooltip";
 import { useAnimate, usePresence } from "framer-motion";
 import { UserLoggedInContext } from "@/context/IsLoggedIn.context";
 import Cookies from "js-cookie";
+import { useStore } from "@/utils/zustand.store";
 
 const Navbar = () => {
   // USE STATES
@@ -23,6 +24,7 @@ const Navbar = () => {
   const [scope, animate] = useAnimate();
   const { isUSerLoggedIn } = useContext(UserLoggedInContext);
   const router = useRouter();
+  const totalProducts = useStore((state) => state.totalProducts);
 
   // FUNCTIONS
   const toggleExpandOff = () => {
@@ -147,13 +149,15 @@ const Navbar = () => {
             } text-white`}
             onClick={handleCart}
           >
-            <span
-              className={`${
-                iconExpand ? "w-3 h-3 text-[9px]" : "w-2 h-2"
-              } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute left-5 top-1`}
-            >
-              {iconExpand && 1}
-            </span>
+            {totalProducts > 0 && (
+              <span
+                className={`${
+                  iconExpand ? "w-3 h-3 text-[9px]" : "w-2 h-2"
+                } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute left-5 top-1`}
+              >
+                {iconExpand && totalProducts}
+              </span>
+            )}
             <Tooltip text="Cart">
               <HiOutlineShoppingBag />
             </Tooltip>
