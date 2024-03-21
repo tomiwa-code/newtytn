@@ -20,11 +20,17 @@ import {
   scrollAction,
   theImage,
 } from "@/utils/variants";
+import { AddProductType } from "@/utils/types";
+import { addToCartFunc } from "@/utils/functions";
+import { useStore } from "@/utils/zustand.store";
+import { UserLoggedInContext } from "@/context/IsLoggedIn.context";
+import { usePathname, useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const HeroSection: React.FC = () => {
   const slides = [
     {
-      id: 1,
+      id: "1",
       lining: "clothing",
       color: "cream",
       size: "large",
@@ -34,7 +40,7 @@ const HeroSection: React.FC = () => {
       link: "https://res.cloudinary.com/dgdoymhtj/image/upload/v1705874638/tytn/hero/Men_Checker___Slogan_Graphic_Tee-removebg-preview_hnvbyt.png",
     },
     {
-      id: 2,
+      id: "2",
       lining: "clothing",
       color: "black and yellow",
       size: "large",
@@ -44,7 +50,7 @@ const HeroSection: React.FC = () => {
       link: "https://res.cloudinary.com/dgdoymhtj/image/upload/v1705872681/tytn/hero/Men_Letter_Graphic_Kangaroo_Pocket_Drawstring_Hoodie-removebg-preview_lrdzoc.png",
     },
     {
-      id: 3,
+      id: "3",
       lining: "clothing",
       color: "black and red",
       size: "large",
@@ -55,6 +61,14 @@ const HeroSection: React.FC = () => {
     },
   ];
 
+  // DECLARES
+  const addToCart = useStore((state) => state.addProduct);
+  const cartItems = useStore((state) => state.products);
+  const getCurrentUrl = usePathname();
+  const router = useRouter();
+  const { isUSerLoggedIn } = React.useContext(UserLoggedInContext);
+
+  // FUNCTIONS
   const scrollToAction = () => {
     window.scrollTo({
       top: 900,
@@ -62,10 +76,62 @@ const HeroSection: React.FC = () => {
     });
   };
 
+  const handleAddToCart = ({
+    id,
+    name,
+    color,
+    size,
+    price,
+    total_price,
+    quantity,
+  }: AddProductType) => {
+    const data = addToCartFunc({
+      id,
+      name,
+      color,
+      size,
+      price,
+      total_price,
+      quantity,
+      cartItems,
+    });
+    addToCart(data);
+  };
+
+  const handleBuyNow = ({
+    id,
+    name,
+    color,
+    size,
+    price,
+    total_price,
+    quantity,
+  }: AddProductType) => {
+    // check if user is logged in
+    if (isUSerLoggedIn === true) {
+      const data = addToCartFunc({
+        id,
+        name,
+        color,
+        size,
+        price,
+        total_price,
+        quantity,
+        cartItems,
+      });
+      addToCart(data);
+      router.push("/cart");
+    } else {
+      if (getCurrentUrl) {
+        Cookies.set("athpaslt", getCurrentUrl);
+        router.push("/auth");
+      }
+    }
+  };
+
   return (
     <div className="w-full relative h-screen flex items-center justify-center bg-semiWhite overflow-hidden">
       <Swiper
-        grabCursor={true}
         effect={"creative"}
         creativeEffect={{
           prev: {
@@ -84,6 +150,7 @@ const HeroSection: React.FC = () => {
         }}
         autoplay={{
           delay: 5000,
+          pauseOnMouseEnter: true,
           disableOnInteraction: false,
         }}
         loop={true}
@@ -170,13 +237,39 @@ const HeroSection: React.FC = () => {
 
                 <div className="flex items-center justify-center gap-x-3 absolute -bottom-44">
                   <Tooltip text="Add to cart">
-                    <button className="rounded-full bg-princetonOrange text-white w-10 h-10 justify-center items-center flex">
+                    <button
+                      className="rounded-full bg-princetonOrange text-white w-10 h-10 justify-center items-center flex"
+                      onClick={() =>
+                        handleAddToCart({
+                          id,
+                          color,
+                          size,
+                          price: new_price,
+                          name: product_name,
+                          quantity: 1,
+                          total_price: new_price,
+                        })
+                      }
+                    >
                       <BsPlusLg />
                     </button>
                   </Tooltip>
 
                   <Tooltip text="Buy now">
-                    <button className="rounded-full text-black text-2xl w-10 justify-center items-center flex h-10">
+                    <button
+                      className="rounded-full text-black text-2xl w-10 justify-center items-center flex h-10"
+                      onClick={() =>
+                        handleBuyNow({
+                          id,
+                          color,
+                          size,
+                          price: new_price,
+                          name: product_name,
+                          quantity: 1,
+                          total_price: new_price,
+                        })
+                      }
+                    >
                       <BsCart2 />
                     </button>
                   </Tooltip>
