@@ -1,8 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import LoginImage from "public/login.jpg";
-import LoginImage2 from "public/login2.jpg";
 import { HandleAuthProps } from "@/utils/types";
 
 const ToggleOverlay = ({ toggleAuth }: HandleAuthProps) => {
@@ -18,7 +16,9 @@ const ToggleOverlay = ({ toggleAuth }: HandleAuthProps) => {
       className="absolute w-1/2 h-screen overflow-hidden before:inset-0 before:absolute before:bg-princetonOrange before:bg-opacity-80 before:z-20"
     >
       <Image
-        src={LoginImage}
+        src={
+          "https://res.cloudinary.com/dgdoymhtj/image/upload/v1710983572/tytn/announcements/Have_you_heard_about_these_new_colors__hl3shg.jpg"
+        }
         alt="login image"
         width={1000}
         height={1000}
@@ -29,14 +29,16 @@ const ToggleOverlay = ({ toggleAuth }: HandleAuthProps) => {
         }`}
       />
       <Image
-        src={LoginImage2}
+        src={
+          "https://res.cloudinary.com/dgdoymhtj/image/upload/v1710983572/tytn/announcements/download_9_jvolwk.jpg"
+        }
         alt="login image"
         width={1000}
         height={1000}
         className={`${
           !toggleAuth
             ? "opacity-0 z-0 "
-            : "opacity-100 relative z-10 duration-500 delay-200"
+            : "opacity-100 relative z-10 duration-500 delay-200 grayscale"
         }`}
       />
       <p className=" absolute top-[20%] text-white text-xl font-bold left-1/2 -translate-y-1/2 -translate-x-1/2 z-30">
