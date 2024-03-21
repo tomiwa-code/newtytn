@@ -12,9 +12,8 @@ const GoBack: React.FunctionComponent<IGoBackProps> = (props) => {
   };
 
   return (
-    <div>
       <button
-        className="flex gap-x-2 items-center capitalize text-gray-600"
+        className="flex gap-x-2 py-2 items-center capitalize text-gray-600"
         onClick={handleBack}
       >
         <span className="text-3xl">
@@ -22,7 +21,6 @@ const GoBack: React.FunctionComponent<IGoBackProps> = (props) => {
         </span>{" "}
         go back
       </button>
-    </div>
   );
 };
 

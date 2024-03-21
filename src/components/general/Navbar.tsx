@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Logo from "public/tytn.png";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineShoppingBag } from "react-icons/hi";
@@ -81,14 +80,26 @@ const Navbar = () => {
     }
   }, [isPresent]);
 
+  useEffect(() => {
+    useStore.persist.rehydrate();
+  }, []);
+
   return (
     <div
       ref={scope}
       className="opacity-0 absolute py-8 top-5 z-[90] px-20 flex items-center justify-between w-full"
     >
       {/* Logo  */}
-      <Link href={"#"} className="w-[50px]">
-        <Image src={Logo} alt="logo" width={40} height={40} priority />
+      <Link href={"/"} className="w-[50px]">
+        <Image
+          src={
+            "https://res.cloudinary.com/dgdoymhtj/image/upload/v1710975934/tytn/announcements/tytn_fprw4d.png"
+          }
+          alt="logo"
+          width={40}
+          height={40}
+          priority
+        />
       </Link>
 
       {/* Links  */}
@@ -138,9 +149,13 @@ const Navbar = () => {
             } text-white`}
             onClick={handleSearch}
           >
-            <Tooltip text="Search">
+            {iconExpand ? (
+              <Tooltip text="Search">
+                <GoSearch />
+              </Tooltip>
+            ) : (
               <GoSearch />
-            </Tooltip>
+            )}
           </button>
 
           <button
@@ -158,9 +173,13 @@ const Navbar = () => {
                 {iconExpand && totalProducts}
               </span>
             )}
-            <Tooltip text="Cart">
+            {iconExpand ? (
+              <Tooltip text="Cart">
+                <HiOutlineShoppingBag />
+              </Tooltip>
+            ) : (
               <HiOutlineShoppingBag />
-            </Tooltip>
+            )}
           </button>
 
           {iconExpand && (
@@ -171,9 +190,13 @@ const Navbar = () => {
               {isUSerLoggedIn === true && (
                 <span className="w-2 h-2 bg-wheelOrange rounded-full absolute left-5 top-1"></span>
               )}
-              <Tooltip text="Profile">
+              {iconExpand ? (
+                <Tooltip text="Profile">
+                  <LuUser2 />
+                </Tooltip>
+              ) : (
                 <LuUser2 />
-              </Tooltip>
+              )}
             </button>
           )}
         </div>

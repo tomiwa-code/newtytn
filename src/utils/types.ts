@@ -32,8 +32,6 @@ export type AddProductType = {
 
 export type DispatchActions = {
   addProduct: (props: AddProductType[]) => void;
-  removeProduct: (props: AddProductType[]) => void;
-  deleteProduct: (props: AddProductType[]) => void;
   clearCart: () => void;
 };
 

@@ -13,7 +13,7 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
   // DECLARES
   const cartItems = useStore((state) => state.products);
   const clearCart = useStore((state) => state.clearCart);
-  const deleteProductFromCart = useStore((state) => state.deleteProduct);
+  const addToCart = useStore((state) => state.addProduct);
   const totalPrice = React.useMemo(() => {
     return cartItems.reduce(
       (accumulator, currentItem) => accumulator + currentItem.total_price,
@@ -31,9 +31,60 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
     const products = cartItems.filter(
       (item) => !(item.id === id && item.color === color && item.size === size)
     );
-    deleteProductFromCart(products);
+    addToCart(products);
     successNotify("item deleted successfully");
   };
+
+  const handleDecreaseQuantity = ({ id, color, size }: ProductProps) => {
+    const findProduct = cartItems.find(
+      (items) => items.id === id && items.color === color && items.size === size
+    );
+
+    if (findProduct && findProduct.quantity > 1) {
+      const findIndex = cartItems.findIndex(
+        (items) =>
+          items.id === findProduct.id &&
+          items.color === color &&
+          items.size === size
+      );
+      const updateCart = [...cartItems];
+      updateCart[findIndex] = {
+        ...updateCart[findIndex],
+        quantity: updateCart[findIndex].quantity - 1,
+        total_price:
+          updateCart[findIndex].total_price - updateCart[findIndex].price,
+      };
+      addToCart(updateCart);
+    }
+  };
+
+  const handleIncreaseQuantity = ({ id, color, size }: ProductProps) => {
+    const findProduct = cartItems.find(
+      (items) => items.id === id && items.color === color && items.size === size
+    );
+
+    if (findProduct) {
+      const findIndex = cartItems.findIndex(
+        (items) =>
+          items.id === findProduct.id &&
+          items.color === color &&
+          items.size === size
+      );
+      const updateCart = [...cartItems];
+      updateCart[findIndex] = {
+        ...updateCart[findIndex],
+        quantity: updateCart[findIndex].quantity + 1,
+        total_price:
+          updateCart[findIndex].total_price + updateCart[findIndex].price,
+      };
+      addToCart(updateCart);
+    }
+  };
+
+  // USE EFFECTS
+  React.useEffect(() => {
+    useStore.persist.rehydrate();
+  }, []);
 
   return (
     <div className="w-full min-h-screen bg-semiWhite pt-28 px-20">
@@ -45,11 +96,12 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
           your shopping Cart{" "}
         </p>
         {cartItems.length !== 0 && (
-          <div className="absolute right-20 top-0 font-semibold">
-            <button className="text-red-500" onClick={handleClearCart}>
-              clear cart
-            </button>
-          </div>
+          <button
+            className="text-red-500 absolute right-20 top-0 py-2 font-semibold"
+            onClick={handleClearCart}
+          >
+            clear cart
+          </button>
         )}
       </div>
 
@@ -76,7 +128,7 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
         </div>
       ) : (
         <div className="relative flex justify-between mt-10">
-          <div className="flex flex-col gap-y-6 gap-x-20 w-[65%]">
+          <div className="flex flex-col gap-y-6 gap-x-20 pb-10 w-[65%]">
             {cartItems.map(
               ({ id, total_price, name, color, size, quantity }, index) => (
                 <div className="flex justify-between items-center" key={index}>
@@ -119,10 +171,20 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
                         {quantity}
                       </p>
                       <div className="gap-y-1.5 flex flex-col">
-                        <button className="rounded-full bg-gray-600 flex items-center justify-center text-semiWhite  w-[25px] h-[25px]">
+                        <button
+                          className="rounded-full bg-gray-600 flex items-center justify-center text-semiWhite  w-[25px] h-[25px]"
+                          onClick={() =>
+                            handleDecreaseQuantity({ id, color, size })
+                          }
+                        >
                           -
                         </button>
-                        <button className="rounded-full bg-gray-600 flex items-center justify-center text-semiWhite  w-[25px] h-[25px]">
+                        <button
+                          className="rounded-full bg-gray-600 flex items-center justify-center text-semiWhite  w-[25px] h-[25px]"
+                          onClick={() =>
+                            handleIncreaseQuantity({ id, color, size })
+                          }
+                        >
                           +
                         </button>
                       </div>
@@ -145,7 +207,7 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
 
             <div className="w-full text-right">
               <p className="font-semibold text-xl text-gray-600">
-                Total Price: {totalPrice} NGN
+                Total Price: {totalPrice.toFixed(2)} NGN
               </p>
             </div>
           </div>

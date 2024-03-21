@@ -132,13 +132,9 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
       );
       const updateCart = [...productFromStore];
       updateCart[findIndex] = {
-        id,
+        ...updateCart[findIndex],
         quantity: newQuantity,
         total_price: newTotalPrice,
-        price: findProduct.price,
-        color: findProduct.color,
-        size: findProduct.size,
-        name: findProduct.name,
       };
       addToCartAction(updateCart);
     } else {
