@@ -92,10 +92,11 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
     setActiveImg({ id, imageUrl });
   };
 
-  const handleBuyNow = () => {
+  const handleBuyNow = (id: string, name: string) => {
     // check if user is logged in
     if (isUSerLoggedIn === true) {
-      console.log("user is logged in");
+      handleAddToCart(id, name);
+      router.push("/cart");
     } else {
       if (getCurrentUrl) {
         Cookies.set("athpaslt", getCurrentUrl);
@@ -310,7 +311,7 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
               </button>
               <button
                 className="w-[130px] hover:bg-black hover:border-none hover:text-semiWhite duration-300 rounded-md py-3 flex gap-x-2 items-center justify-center text-sm border border-gray-400 text-center capitalize"
-                onClick={handleBuyNow}
+                onClick={() => handleBuyNow("1", "peng")}
               >
                 <HiOutlineShoppingBag />
                 <p>buy now</p>
