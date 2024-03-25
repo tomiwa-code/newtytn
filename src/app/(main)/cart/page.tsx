@@ -1,15 +1,24 @@
 "use client";
 import GoBack from "@/components/general/GoBack";
-import { successNotify } from "@/utils/toaster";
+import { errNotify, successNotify } from "@/utils/toaster";
 import { ProductProps } from "@/utils/types";
 import { useStore } from "@/utils/zustand.store";
 import Image from "next/image";
 import Link from "next/link";
 import * as React from "react";
+import Checkout from "@/components/general/Checkout";
+import { useSearchParams } from "next/navigation";
+import axios from "axios";
+import Success from "@/components/general/Success";
 
 interface ICartProps {}
 
 const Cart: React.FunctionComponent<ICartProps> = (props) => {
+  // USE STATES
+  const [transactionDetails, setTransactionsDetails] =
+    React.useState<{} | null>(null);
+  const [isLoading, setIsLoading] = React.useState(false);
+
   // DECLARES
   const cartItems = useStore((state) => state.products);
   const clearCart = useStore((state) => state.clearCart);
@@ -20,6 +29,8 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
       0
     );
   }, [cartItems]);
+  const searchParams = useSearchParams();
+  const transactionRef = searchParams.get("reference");
 
   // FUNCTIONS
   const handleClearCart = () => {
@@ -85,6 +96,32 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
   React.useEffect(() => {
     useStore.persist.rehydrate();
   }, []);
+
+  React.useEffect(() => {
+    const verifyTransId = async () => {
+      setIsLoading(true);
+      try {
+        if (transactionRef) {
+          const res = await axios.get(
+            `https://api.paystack.co/transaction/verify/${transactionRef}`,
+            {
+              headers: {
+                Authorization: `Bearer ${process.env.NEXT_PUBLIC_PAYSTACK_SECRET_KEY}`,
+                "Content-Type": "application/json",
+              },
+            }
+          );
+          const { id, metadata } = await res.data.data;
+          setTransactionsDetails({ id, metadata });
+          setIsLoading(false);
+        }
+      } catch (err) {
+        setIsLoading(false);
+        errNotify("Oops Something went wrong, Please refresh.");
+      }
+    };
+    verifyTransId();
+  }, [transactionRef]);
 
   return (
     <div className="w-full min-h-screen bg-semiWhite pt-28 px-20">
@@ -212,8 +249,13 @@ const Cart: React.FunctionComponent<ICartProps> = (props) => {
             </div>
           </div>
 
-          <div className="fixed w-[25%] h-[550px] rounded-lg z-[90] bg-black bg-opacity-90 right-20 overflow-auto"></div>
+          <Checkout totalPrice={totalPrice} />
         </div>
+      )}
+
+      {/* Success Comp  */}
+      {transactionDetails && (
+        <Success isLoading={isLoading} purchaseDetails={transactionDetails} />
       )}
     </div>
   );

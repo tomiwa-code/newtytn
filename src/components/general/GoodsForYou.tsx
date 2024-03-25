@@ -49,7 +49,7 @@ const GoodsForYou: React.FunctionComponent<IGoodsForYouProps> = (props) => {
       <div className="flex gap-x-10 py-10 px-20 w-full z-20 relative">
         {productsArr.map(({ id, imgUrl, price, title }) => (
           <Link
-            href={"#"}
+            href={"/shop_product/productName"}
             className="rounded-md overflow-hidden h-[330px] relative w-[250px] bg-white text-center"
             key={id}
           >
