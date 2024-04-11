@@ -44,12 +44,6 @@ const Shop: React.FunctionComponent<IShopProps> = (props) => {
     {
       link: "https://res.cloudinary.com/dgdoymhtj/image/upload/v1705877392/tytn/products/new3_eckzzr.jpg",
     },
-    {
-      link: "https://res.cloudinary.com/dgdoymhtj/image/upload/v1705877392/tytn/products/photo_2019-09-21_13-41-30_rdr0zh.webp",
-    },
-    {
-      link: "https://res.cloudinary.com/dgdoymhtj/image/upload/v1705877363/tytn/products/11494d595efca4debf44db3832ba9a68_uns49v.jpg",
-    },
   ];
 
   // FUNCTIONS
@@ -214,7 +208,7 @@ const Shop: React.FunctionComponent<IShopProps> = (props) => {
           )}
         </div>
 
-        <div className="w-full flex gap-x-10 flex-wrap gap-y-12 justify-center">
+        <div className="w-full flex gap-x-10 flex-wrap gap-y-12">
           {products.map(({ link }, index) => (
             <Product key={index} link={link} text={null} />
           ))}

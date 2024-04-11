@@ -1,7 +1,7 @@
 "use client";
 import GoBack from "@/components/general/GoBack";
 import { errNotify, successNotify } from "@/utils/toaster";
-import { ProductProps } from "@/utils/types";
+import { ProductProps } from "../../../types/zustandTypes";
 import { useStore } from "@/utils/zustand.store";
 import Image from "next/image";
 import Link from "next/link";

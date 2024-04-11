@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { LuUser2 } from "react-icons/lu";
 import { GoSearch } from "react-icons/go";
 import { LiaTimesSolid } from "react-icons/lia";
 import { useContext, useEffect, useState } from "react";
@@ -24,6 +23,7 @@ const Navbar = () => {
   const { isUSerLoggedIn } = useContext(UserLoggedInContext);
   const router = useRouter();
   const totalProducts = useStore((state) => state.totalProducts);
+  const userDetails = useStore((state) => state.userDetails);
 
   // FUNCTIONS
   const toggleExpandOff = () => {
@@ -50,6 +50,8 @@ const Navbar = () => {
       if (isUSerLoggedIn === false) {
         Cookies.set("athpaslt", pathname);
         router.push("/auth");
+      } else {
+        router.push("/profile/info");
       }
     }
   };
@@ -187,16 +189,25 @@ const Navbar = () => {
               className={`rounded-full w-8 h-8 flex items-center justify-center absolute left-16 text-lg text-white`}
               onClick={handleUser}
             >
-              {isUSerLoggedIn === true && (
-                <span className="w-2 h-2 bg-wheelOrange rounded-full absolute left-5 top-1"></span>
-              )}
-              {iconExpand ? (
-                <Tooltip text="Profile">
-                  <LuUser2 />
-                </Tooltip>
-              ) : (
-                <LuUser2 />
-              )}
+              <Tooltip text={"profile"}>
+                <span
+                  className={`w-5 h-5 rounded-full ${
+                    isUSerLoggedIn === true && "border border-wheelOrange"
+                  } overflow-hidden block`}
+                >
+                  <Image
+                    src={
+                      userDetails?.profilePhoto
+                        ? userDetails?.profilePhoto
+                        : "https://res.cloudinary.com/dgdoymhtj/image/upload/v1710543935/e4ffe1cc-eb87-49ae-ac39-f114c706184c.png"
+                    }
+                    alt="dp"
+                    width={1000}
+                    height={1000}
+                    priority
+                  />
+                </span>
+              </Tooltip>
             </button>
           )}
         </div>

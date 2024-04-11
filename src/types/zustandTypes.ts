@@ -1,7 +1,4 @@
-export type HandleAuthProps = {
-  handleAuthToggle: () => void;
-  toggleAuth: boolean;
-};
+import { UserDataProp } from "./userTypes";
 
 export type UserDetailsRes = {
   address: object;
@@ -18,6 +15,7 @@ export type UserDetailsRes = {
 export type InitialStore = {
   products: AddProductType[];
   totalProducts: number;
+  userDetails: UserDataProp
 };
 
 export type AddProductType = {
@@ -33,6 +31,8 @@ export type AddProductType = {
 export type DispatchActions = {
   addProduct: (props: AddProductType[]) => void;
   clearCart: () => void;
+  addUserDetails: (props: UserDataProp) => void
+  logout: () => void
 };
 
 export type Store = InitialStore & DispatchActions;

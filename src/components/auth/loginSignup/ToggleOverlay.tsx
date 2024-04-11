@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import { HandleAuthProps } from "@/utils/types";
+import { HandleAuthProps } from "../../../types/authTypes";
 
 const ToggleOverlay = ({ toggleAuth }: HandleAuthProps) => {
   return (

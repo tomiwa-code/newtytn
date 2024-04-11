@@ -1,8 +1,8 @@
-import { HandleAuthProps } from "@/utils/types";
 import React from "react";
 import { motion } from "framer-motion";
 import { fadeInUpToggle } from "@/utils/variants";
 import Form from "./Form";
+import { HandleAuthProps } from "../../../types/authTypes";
 
 const Login = ({ handleAuthToggle, toggleAuth }: HandleAuthProps) => {
   return (

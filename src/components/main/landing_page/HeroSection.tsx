@@ -20,7 +20,7 @@ import {
   scrollAction,
   theImage,
 } from "@/utils/variants";
-import { AddProductType } from "@/utils/types";
+import { AddProductType } from "../../../types/zustandTypes";
 import { addToCartFunc } from "@/utils/functions";
 import { useStore } from "@/utils/zustand.store";
 import { UserLoggedInContext } from "@/context/IsLoggedIn.context";

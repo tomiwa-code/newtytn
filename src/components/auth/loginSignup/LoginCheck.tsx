@@ -7,6 +7,8 @@ import { useRouter } from "next/navigation";
 import { ROUTES } from "@/utils/tytnRoutes";
 import Cookies from "js-cookie";
 import { Puff } from "react-loader-spinner";
+import { UserDataProp } from "../../../types/userTypes";
+import { useStore } from "@/utils/zustand.store";
 
 const LoginCheck = (props: { token: string }) => {
   // USE STATES
@@ -21,6 +23,7 @@ const LoginCheck = (props: { token: string }) => {
 
   // DECLARES
   const router = useRouter();
+  const setUserDetails = useStore((state) => state.addUserDetails);
 
   // FUNCTIONS
   const handleCheck = async () => {
@@ -30,14 +33,17 @@ const LoginCheck = (props: { token: string }) => {
       isSuccess: false,
     });
     try {
-      const res: any = await getRequest(URL.GET_USER_BY_TOKEN, props.token);
+      const res: UserDataProp = await getRequest(
+        URL.GET_USER_BY_TOKEN,
+        props.token
+      );
       setCheckRes({
         isLoading: false,
         isError: { state: false, message: "" },
         isSuccess: true,
       });
 
-      if (!res.profileCreated) {
+      if (!res?.profileCreated) {
         Cookies.set("onboarding", "true");
         Cookies.set("email", res.email);
         Cookies.set("isAllowed", "true");
@@ -47,6 +53,7 @@ const LoginCheck = (props: { token: string }) => {
       } else {
         Cookies.set("_Ga_TTYDI", props.token, { expires: 3 });
         Cookies.set("_inEdGGolIs", "true");
+        setUserDetails(res);
 
         // check for the last url before redirect
         const chkRedirect = Cookies.get("athpaslt");

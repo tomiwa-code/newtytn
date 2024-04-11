@@ -1,5 +1,5 @@
 import { successNotify } from "./toaster";
-import { AddProductType } from "./types";
+import { AddProductType } from "../types/zustandTypes";
 
 type ArrayProp = {
   cartItems: AddProductType[];
