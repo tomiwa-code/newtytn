@@ -128,7 +128,7 @@ const LeftFilterBar: React.FunctionComponent<ILeftFilterBarProps> = ({
       }
       setActivePrice("");
     }
-  }, [priceRange]);
+  }, [priceRange, activeFilterObj.price, activePrice]);
 
   React.useEffect(() => {
     if (activeFilterObj) {
@@ -146,7 +146,7 @@ const LeftFilterBar: React.FunctionComponent<ILeftFilterBarProps> = ({
         setActivePrice("");
       }
     }
-  }, [activeFilterObj]);
+  }, [activeFilterObj, activeColor, activePrice, activeSize]);
 
   React.useEffect(() => {
     if (activeCategory) {

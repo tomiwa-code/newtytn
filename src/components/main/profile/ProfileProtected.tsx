@@ -11,7 +11,7 @@ const ProfileProtected = ({ children }: { children: React.ReactNode }) => {
     if (isUSerLoggedIn === false) {
       router.back()
     }
-  }, [isUSerLoggedIn]);
+  }, [isUSerLoggedIn, router]);
 
   return isUSerLoggedIn === true ? children : null;
 };

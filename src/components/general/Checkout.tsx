@@ -22,7 +22,7 @@ const Checkout: React.FunctionComponent<ICheckoutProps> = ({ totalPrice }) => {
     } else {
       return totalPrice;
     }
-  }, [totalPrice]);
+  }, [totalPrice, customerDetails.coupon]);
   const [checkoutReady, setCheckoutReady] = React.useState<boolean>(false);
   const cartItems = useStore((state) => state.products);
   const clearCart = useStore((state) => state.clearCart);

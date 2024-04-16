@@ -159,7 +159,7 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
     if (quantity > 0) {
       setNewPrice(quantity * initialPrice);
     }
-  }, [quantity]);
+  }, [quantity, initialPrice]);
 
   return (
     <div className="bg-semiWhite">
