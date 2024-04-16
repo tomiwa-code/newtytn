@@ -95,8 +95,11 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
   const handleBuyNow = (id: string, name: string) => {
     // check if user is logged in
     if (isUSerLoggedIn === true) {
-      handleAddToCart(id, name);
-      router.push("/cart");
+      const isTrue = handleAddToCart(id, name);
+
+      if (isTrue) {
+        router.push("/cart");
+      }
     } else {
       if (getCurrentUrl) {
         Cookies.set("athpaslt", getCurrentUrl);
@@ -108,11 +111,11 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
   const handleAddToCart = (id: string, name: string) => {
     if (quantity < 1) {
       errNotify("Quantity cannot be less than 1");
-      return;
+      return false;
     }
     if (!clothProp.color || !clothProp.size) {
       errNotify("Select a size and color");
-      return;
+      return false;
     }
 
     const findProduct = productFromStore.find(
@@ -163,8 +166,10 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
 
   return (
     <div className="bg-semiWhite">
-      <div className="w-full min-h-screen bg-semiWhite pb-20 px-20 pt-28">
-        <GoBack />
+      <div className="w-full min-h-screen bg-semiWhite pb-20 px-20 pt-20">
+        <div className="mt-5">
+          <GoBack />
+        </div>
         <div className="flex">
           {/* Left  */}
           <div className="w-1/2 py-10 px-20 space-y-10">
