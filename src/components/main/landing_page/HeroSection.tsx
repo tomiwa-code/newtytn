@@ -340,7 +340,7 @@ const HeroSection: React.FC = () => {
           </div>
         </div>
       </motion.div>
-      <div className="w-[120%] bg-semiWhite h-32 md:h-24 absolute -left-10 -bottom-10 z-50 blur-lg "></div>
+      <div className="w-[120%] bg-semiWhite h-32 md:h-24 absolute -left-10 -bottom-24 md:-bottom-10 z-50 blur-lg "></div>
     </div>
   );
 };

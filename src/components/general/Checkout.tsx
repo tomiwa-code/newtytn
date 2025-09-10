@@ -39,7 +39,7 @@ const Checkout: React.FunctionComponent<ICheckoutProps> = ({ totalPrice }) => {
         {
           display_name: "Items Purchased",
           variable_name: "items_purchased",
-          value: cartItems
+          value: cartItems,
         },
       ],
     },
@@ -73,7 +73,7 @@ const Checkout: React.FunctionComponent<ICheckoutProps> = ({ totalPrice }) => {
   }, [customerDetails]);
 
   return (
-    <div className="fixed w-[25%] h-[550px] px-8 py-6 rounded-xl z-[90] bg-black bg-opacity-90 right-20 overflow-auto">
+    <div className="lg:fixed max-w-2xl overflow-hidden mx-auto w-full lg:w-[25%] h-[550px] px-8 py-6 rounded-xl z-[90] bg-black bg-opacity-90 right-20">
       <p className="text-wheelOrange text-xl mt-6">Account Details</p>
 
       <div className="mt-8 flex flex-col gap-y-8">
