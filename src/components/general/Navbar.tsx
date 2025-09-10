@@ -9,6 +9,8 @@ import { useContext, useEffect, useState } from "react";
 import Tooltip from "./Tooltip";
 import { useAnimate, usePresence } from "framer-motion";
 import { UserLoggedInContext } from "@/context/IsLoggedIn.context";
+import { MdOutlineContactSupport } from "react-icons/md";
+import { LiaShoppingBasketSolid } from "react-icons/lia";
 import Cookies from "js-cookie";
 import { useStore } from "@/utils/zustand.store";
 
@@ -36,12 +38,28 @@ const Navbar = () => {
   const handleSearch = () => {
     if (iconExpand) {
       console.log("search");
+      toggleExpandOff();
     }
   };
 
   const handleCart = () => {
     if (iconExpand) {
+      toggleExpandOff();
       router.push("/cart");
+    }
+  };
+
+  const handleShop = () => {
+    if (iconExpand) {
+      toggleExpandOff();
+      router.push("/shop");
+    }
+  };
+
+  const handleContact = () => {
+    if (iconExpand) {
+      toggleExpandOff();
+      router.push("/contact");
     }
   };
 
@@ -50,6 +68,7 @@ const Navbar = () => {
       if (isUSerLoggedIn === false) {
         Cookies.set("athpaslt", pathname);
         router.push("/auth");
+        toggleExpandOff();
       } else {
         router.push("/profile/info");
       }
@@ -89,7 +108,7 @@ const Navbar = () => {
   return (
     <div
       ref={scope}
-      className="opacity-0 absolute py-8 top-5 z-[90] px-20 flex items-center justify-between w-full"
+      className="opacity-0 absolute lg:py-8 top-5 z-[90] px-5 lg:px-20 flex items-center justify-between w-full"
     >
       {/* Logo  */}
       <Link href={"/"} className="w-[50px]">
@@ -105,7 +124,7 @@ const Navbar = () => {
       </Link>
 
       {/* Links  */}
-      <div className="flex items-center justify-center gap-x-20 w-1/2">
+      <div className="lg:flex items-center hidden justify-center gap-x-20 w-1/2">
         <Link
           href={"/"}
           className={`text-xs tracking-[0.2em] text-black uppercase ${
@@ -140,53 +159,76 @@ const Navbar = () => {
 
       {/* right icons  */}
       <div
-        className={`bg-black rounded-full duration-200 flex relative items-center cursor-pointer ${
-          iconExpand ? "w-[130px] h-[40px]" : "w-[55px] h-[40px]"
+        className={`bg-black rounded-full transition-transform duration-300 h-[40px] flex relative items-center justify-center px-2 ${
+          !iconExpand ? "gap-x-2" : ""
         }`}
       >
-        <div onClick={toggleExpandOn} className="absolute top-1">
-          <button
-            className={`rounded-full w-8 h-8 flex items-center justify-center absolute ${
-              iconExpand ? "left-2 text-lg" : "left-0 text-base"
-            } text-white`}
-            onClick={handleSearch}
-          >
-            {iconExpand ? (
-              <Tooltip text="Search">
-                <GoSearch />
-              </Tooltip>
-            ) : (
-              <GoSearch />
-            )}
-          </button>
+        {!iconExpand && (
+          <div
+            className="absolute z-50 inset-0 cursor-pointer"
+            onClick={toggleExpandOn}
+          />
+        )}
 
-          <button
-            className={`rounded-full w-8 h-8 flex items-center justify-center absolute ${
-              iconExpand ? "left-9 text-lg" : "left-5 text-base"
-            } text-white`}
-            onClick={handleCart}
-          >
-            {totalProducts > 0 && (
-              <span
-                className={`${
-                  iconExpand ? "w-3 h-3 text-[9px]" : "w-2 h-2"
-                } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute left-5 top-1`}
-              >
-                {iconExpand && totalProducts}
-              </span>
-            )}
-            {iconExpand ? (
-              <Tooltip text="Cart">
-                <HiOutlineShoppingBag />
-              </Tooltip>
-            ) : (
-              <HiOutlineShoppingBag />
-            )}
-          </button>
+        {/* SEARCH  */}
+        <button
+          className={`rounded-full flex items-center justify-center ${
+            iconExpand ? "text-lg w-8 h-8" : "text-base"
+          } text-white`}
+          onClick={handleSearch}
+        >
+          <Tooltip text="Search">
+            <GoSearch />
+          </Tooltip>
+        </button>
 
-          {iconExpand && (
+        {/* CART  */}
+        <button
+          className={`rounded-full flex items-center justify-center ${
+            iconExpand ? "w-8 h-8 text-lg" : "text-base"
+          } text-white`}
+          onClick={handleCart}
+        >
+          {totalProducts > 0 && (
+            <span
+              className={`${
+                iconExpand ? "w-3 h-3 text-[9px]" : "w-2 h-2"
+              } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute left-5 top-1`}
+            >
+              {iconExpand && totalProducts}
+            </span>
+          )}
+
+          <Tooltip text="Cart">
+            <HiOutlineShoppingBag />
+          </Tooltip>
+        </button>
+
+        {iconExpand && (
+          <>
+            {/* SHOP  */}
             <button
-              className={`rounded-full w-8 h-8 flex items-center justify-center absolute left-16 text-lg text-white`}
+              className={`rounded-full flex lg:hidden items-center justify-center w-8 h-8 text-lg text-white`}
+              onClick={handleShop}
+            >
+              <Tooltip text="Shop">
+                <LiaShoppingBasketSolid />
+              </Tooltip>
+            </button>
+
+            {/* CONTACT  */}
+            <button
+              className={`rounded-full flex lg:hidden items-center justify-center w-8 h-8 text-lg text-white`}
+              onClick={handleContact}
+            >
+              <Tooltip text="Contact">
+                <MdOutlineContactSupport />
+              </Tooltip>
+            </button>
+
+            {/* PROFILE  */}
+            <button
+              className={`rounded-full w-8 h-8 flex items-center justify-center text-lg text-white`}
               onClick={handleUser}
             >
               <Tooltip text={"profile"}>
@@ -209,17 +251,17 @@ const Navbar = () => {
                 </span>
               </Tooltip>
             </button>
-          )}
-        </div>
-        {iconExpand && (
-          <button
-            onClick={toggleExpandOff}
-            className="absolute text-princetonOrange text-base right-3 top-3"
-          >
-            <Tooltip text="Close">
-              <LiaTimesSolid />
-            </Tooltip>
-          </button>
+
+            {/* TIMES  */}
+            <button
+              onClick={toggleExpandOff}
+              className=" text-princetonOrange text-lg px-1 pt-2"
+            >
+              <Tooltip text="Close">
+                <LiaTimesSolid />
+              </Tooltip>
+            </button>
+          </>
         )}
       </div>
     </div>

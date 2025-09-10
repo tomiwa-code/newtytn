@@ -6,7 +6,7 @@ import { arrivalSlide } from "@/utils/variants";
 
 const Newsletter = () => {
   return (
-    <div className="w-full bg-semiWhite pt-10 pb-20 px-20 flex items-center justify-center flex-col">
+    <div className="w-full pb-20 flex items-center justify-center flex-col">
       <Header
         text="Be the first to know"
         subText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto,
@@ -22,9 +22,9 @@ const Newsletter = () => {
         <input
           type="text"
           placeholder="janedoe@gmail.com"
-          className="rounded-m border-2 border-semiGray font-light rounded-tl-md rounded-bl-md w-[300px] py-2 focus:outline-none px-5 bg-transparent h-[60px]"
+          className="rounded-m border-2 border-semiGray text-sm font-light rounded-tl-md rounded-bl-md md:w-[300px] py-2 focus:outline-none px-5 bg-transparent h-[50px]"
         />
-        <button className="w-[150px] py-3 text-center bg-wheelOrange text-semiWhite rounded-tr-md rounded-br-md h-[60px] text-base capitalize">
+        <button className="w-[100px] text-sm py-3 text-center bg-wheelOrange text-semiWhite rounded-tr-md rounded-br-md h-[50px] capitalize">
           subscribe
         </button>
       </motion.form>

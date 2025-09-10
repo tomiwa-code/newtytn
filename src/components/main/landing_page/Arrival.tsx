@@ -37,12 +37,14 @@ const Arrival = () => {
   const text = "New Arrival";
 
   return (
-    <LandingProducts
-      products={products}
-      imageUrl={imageUrl}
-      subText={subText}
-      text={text}
-    />
+    <div className="pt-20">
+      <LandingProducts
+        products={products}
+        imageUrl={imageUrl}
+        subText={subText}
+        text={text}
+      />
+    </div>
   );
 };
 

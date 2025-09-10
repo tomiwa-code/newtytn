@@ -130,7 +130,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <div className="w-full relative h-screen flex items-center justify-center bg-semiWhite overflow-hidden">
+    <div className="w-full relative h-[80vh] md:h-[50vh] lg:h-screen flex items-center justify-center bg-semiWhite overflow-hidden">
       <Swiper
         effect={"creative"}
         creativeEffect={{
@@ -155,7 +155,7 @@ const HeroSection: React.FC = () => {
         }}
         loop={true}
         modules={[EffectCreative, Pagination, Autoplay]}
-        className="w-[90%] h-full relative"
+        className="w-full lg:w-[90%] h-full relative"
       >
         {slides.map(
           ({ id, product_name, new_price, lining, color, size, link }) => (
@@ -166,7 +166,7 @@ const HeroSection: React.FC = () => {
                 initial="initial"
                 animate="animate"
                 custom={1}
-                className="absolute z-10 left-20 top-1/2 -translate-y-1/2"
+                className="absolute hidden md:block z-10 left-5 md:left-10 lg:left-20 top-1/2 -translate-y-1/2"
               >
                 <div className="space-y-2">
                   <h3 className="font-medium tracking-wide capitalize text-4xl w-[230px]">
@@ -178,11 +178,12 @@ const HeroSection: React.FC = () => {
                 </div>
               </motion.div>
 
+
               <motion.div
                 variants={orangeCircle}
                 initial="initial"
                 animate="animate"
-                className="rounded-full absolute w-[500px] bg-princetonOrange h-[500px] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+                className="rounded-full absolute w-[300px] h-[300px] lg:w-[500px] lg:h-[500px] bg-princetonOrange left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
               ></motion.div>
 
               <motion.div
@@ -190,7 +191,7 @@ const HeroSection: React.FC = () => {
                 animate="animate"
                 initial="initial"
                 id="theImage"
-                className="relative w-[500px] left-1/2 -translate-x-1/2 h-screen z-50"
+                className="absolute bottom-0 lg:relative w-[300px] h-[300px] left-1/2 -translate-x-1/2 lg:w-[500px] lg:h-screen z-50"
               >
                 <Image
                   src={link}
@@ -208,7 +209,7 @@ const HeroSection: React.FC = () => {
                 initial="initial"
                 animate="animate"
                 custom={1.2}
-                className="w-40 z-10 absolute right-24 top-1/2 -translate-y-1/2"
+                className="w-40 z-10 absolute hidden md:block right-5 lg:right-24 top-1/2 -translate-y-1/2"
               >
                 <div className="space-y-6">
                   <div className="space-y-2">
@@ -235,7 +236,7 @@ const HeroSection: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center gap-x-3 absolute -bottom-44">
+                <div className="flex items-center justify-center gap-x-3 absolute -bottom-16 lg:-bottom-44">
                   <Tooltip text="Add to cart">
                     <button
                       className="rounded-full bg-princetonOrange text-white w-10 h-10 justify-center items-center flex"
@@ -293,7 +294,7 @@ const HeroSection: React.FC = () => {
           variants={scrollAction}
           initial="initial"
           animate="animate"
-          className="bg-semiWhite w-2 h-2 rounded-full mt-2"
+          className="bg-white w-2 h-2 rounded-full mt-2"
         ></motion.div>
       </motion.div>
 
@@ -302,7 +303,7 @@ const HeroSection: React.FC = () => {
         variants={heroSlideInRight}
         initial="initial"
         animate="animate"
-        className="absolute right-20 h-screen flex items-center z-50"
+        className="absolute right-20 h-screen hidden lg:flex items-center z-50"
       >
         <div className="space-y-6">
           <div>

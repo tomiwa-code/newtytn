@@ -17,14 +17,11 @@ const LandingProducts: React.FunctionComponent<ILandingProductsProps> = ({
   products,
   imageUrl,
   subText,
-  text
+  text,
 }) => {
   return (
-    <div className="bg-semiWhite w-full px-20 py-40">
-      <Header
-        subText={subText}
-        text={text}
-      />
+    <div className="w-full md:px-20 mb-10 md:mb-14 lg:mb-20">
+      <Header subText={subText} text={text} />
 
       <div className="flex gap-x-5 items-center">
         {/* left image  */}
@@ -33,7 +30,7 @@ const LandingProducts: React.FunctionComponent<ILandingProductsProps> = ({
           initial="initial"
           whileInView={"animate"}
           viewport={{ once: true }}
-          className="w-[30%] relative"
+          className="w-[30%] relative hidden lg:block"
         >
           <div className="flex items-center justify-center">
             <motion.div
@@ -61,7 +58,7 @@ const LandingProducts: React.FunctionComponent<ILandingProductsProps> = ({
           initial="initial"
           whileInView={"animate"}
           viewport={{ once: true }}
-          className="w-[70%] flex gap-x-7 gap-10 flex-wrap"
+          className="w-full px-5 md:px-0 lg:w-[70%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 md:gap-x-7 gap-y-5"
         >
           {products.map(({ link }, index) => (
             <Product key={index} link={link} text={"new"} />

@@ -15,7 +15,7 @@ import {
 
 const TopCategories = () => {
   return (
-    <div className="w-full px-20 pt-10 pb-20 bg-semiWhite">
+    <div className="w-full px-5 md:px-20 pb-20">
       <Header
         subText="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto,
           amet incidunt."
@@ -23,10 +23,13 @@ const TopCategories = () => {
       />
 
       <div className="flex w-full gap-x-5 items-center">
-        <div className="w-[70%] flex gap-x-1 h-[400px]">
-          <div className="w-1/2 flex gap-x-1">
+        <div className="w-full lg:w-[70%] flex flex-wrap md:flex-nowrap gap-x-1 md:h-[400px]">
+          <div className="w-full md:w-1/2 flex gap-x-1">
             {/* sweatshirt  */}
-            <Link href={"/shop?cat=sweatshirt"} className="w-full h-full space-y-1">
+            <Link
+              href={"/shop?cat=sweatshirt"}
+              className="w-full h-full space-y-1"
+            >
               <motion.div
                 variants={cateAnime}
                 initial="initial"
@@ -68,7 +71,10 @@ const TopCategories = () => {
             </Link>
 
             {/* short  */}
-            <Link href={"/shop?cat=short"} className="w-full h-full overflow-hidden relative">
+            <Link
+              href={"/shop?cat=short"}
+              className="w-full h-full overflow-hidden relative"
+            >
               <motion.div
                 variants={cateAnime}
                 initial="initial"
@@ -102,7 +108,7 @@ const TopCategories = () => {
             </Link>
           </div>
 
-          <div className="w-1/2 space-y-1">
+          <div className="w-full mt-1 md:mt-0 md:w-1/2 space-y-1">
             {/* t-shirt  */}
             <Link href={"/shop?cat=t-shirt"} className="flex gap-x-1 h-[50%]">
               <motion.div
@@ -144,7 +150,7 @@ const TopCategories = () => {
                 </p>
               </motion.div>
             </Link>
-            
+
             {/* joggers  */}
             <Link href={"/shop?cat=joggers"} className="flex gap-x-1 h-[49%]">
               <motion.div
@@ -196,7 +202,7 @@ const TopCategories = () => {
           initial="initial"
           whileInView={"animate"}
           viewport={{ once: true }}
-          className="w-[30%] bg-black relative flex flex-col items-center justify-center"
+          className="w-[30%] hidden bg-black relative lg:flex flex-col items-center justify-center"
         >
           <motion.div
             variants={scrollActionAxis}

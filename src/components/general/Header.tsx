@@ -23,7 +23,7 @@ const Header = (props: { text: string; subText: string }) => {
           viewport={{ once: true }}
           className="text-center w-full flex justify-center"
         >
-          <p className="text-center w-[400px] text-xs text-semiGray">
+          <p className="text-center w-full px-5 md:px-0 md:w-[400px] text-xs text-semiGray">
             {props.subText}
           </p>
         </motion.div>

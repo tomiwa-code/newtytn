@@ -21,8 +21,8 @@ const BestDeal = () => {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden flex flex-col items-center justify-center pb-20 bg-semiWhite">
-      <div className="relative mt-16 mb-10">
+    <div className="relative w-full overflow-hidden flex flex-col items-center justify-center pb-20">
+      <div className="relative mb-10">
         <motion.h3
           variants={titleSlide("left")}
           initial="initial"
@@ -52,7 +52,7 @@ const BestDeal = () => {
         initial="initial"
         whileInView={"animate"}
         viewport={{ once: true }}
-        className="w-[80%] justify-center items-center flex gap-x-7 gap-10 flex-wrap"
+        className="w-full md:w-[80%] px-5 md:px-0 justify-center items-center grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-3 md:gap-x-7 gap-y-5"
       >
         {products.map(({ link }, index) => (
           <Product key={index} link={link} text={"best deal"} />

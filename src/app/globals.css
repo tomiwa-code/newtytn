@@ -26,19 +26,25 @@ body {
 .swiper-pagination-bullet {
   width: 2.5rem !important;
   height: 0.25rem !important;
-  background: #B9B9B9 !important;
+  background: #b9b9b9 !important;
   border-radius: 0 !important;
   transition-duration: 200ms;
 }
 
-.swiper-pagination-bullet-active{
+.swiper-pagination-bullet-active {
   height: 7px !important;
-  background: #FE9200 !important; 
+  background: #fe9200 !important;
 }
-
 
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Hide pagination on medium screens and larger */
+@media (max-width: 768px) {
+  .swiper-pagination {
+    display: none !important;
+  }
 }

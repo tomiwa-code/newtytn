@@ -6,7 +6,7 @@ import { fadeInBottom } from "@/utils/variants";
 
 const BannerCard = () => {
   return (
-    <div className="w-full px-20 pt-10 pb-20 bg-semiWhite">
+    <div className="w-full px-5 md:px-20 pb-20">
       <motion.div
         variants={fadeInBottom}
         initial="initial"
@@ -23,9 +23,10 @@ const BannerCard = () => {
             alt="bannerImage"
             width={1300}
             height={1000}
+            className="w-full h-full object-center object-cover"
           />
         </div>
-        <p className="relative text-center text-semiWhite uppercase text-3xl font-semibold">
+        <p className="relative text-center text-white bg-black/10 backdrop-blur-sm px-5 py-3 uppercase text-3xl font-semibold">
           up to 60% off holiday bit
         </p>
       </motion.div>
