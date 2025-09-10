@@ -184,7 +184,7 @@ const Navbar = () => {
 
         {/* CART  */}
         <button
-          className={`rounded-full flex items-center justify-center ${
+          className={`rounded-full relative flex items-center justify-center ${
             iconExpand ? "w-8 h-8 text-lg" : "text-base"
           } text-white`}
           onClick={handleCart}
@@ -192,8 +192,8 @@ const Navbar = () => {
           {totalProducts > 0 && (
             <span
               className={`${
-                iconExpand ? "w-3 h-3 text-[9px]" : "w-2 h-2"
-              } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute left-5 top-1`}
+                iconExpand ? "w-3 h-3 text-[9px] left-5 top-1" : "w-2 h-2 -left-1 -top-1"
+              } flex items-center justify-center duration-300 bg-princetonOrange rounded-full absolute`}
             >
               {iconExpand && totalProducts}
             </span>
