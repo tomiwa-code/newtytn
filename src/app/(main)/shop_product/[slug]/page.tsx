@@ -166,14 +166,15 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
 
   return (
     <div className="bg-semiWhite">
-      <div className="w-full min-h-screen bg-semiWhite pb-20 px-20 pt-20">
+      <div className="w-full lg:min-h-screen bg-semiWhite lg:pb-20 px-5 lg:px-20 pt-20">
         <div className="mt-5">
           <GoBack />
         </div>
-        <div className="flex">
+
+        <div className="flex flex-col md:flex-row md:gap-x-8 lg:gap-x-0">
           {/* Left  */}
-          <div className="w-1/2 py-10 px-20 space-y-10">
-            <div className="w-[400px] h-[400px] rounded-lg overflow-hidden">
+          <div className="w-full md:w-1/2 py-10 lg:px-20 space-y-10">
+            <div className="w-full h-[300px] md:w-[400px] md:h-[400px] rounded-lg overflow-hidden">
               <Image
                 src={activeImg.imageUrl}
                 alt="product"
@@ -183,7 +184,7 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
               />
             </div>
 
-            <div className="flex w-[400px] gap-x-5 justify-center items-center">
+            <div className="flex w-full lg:w-[400px] gap-x-5 justify-center items-center">
               {productImages.map(({ id, imageUrl }) => (
                 <div key={id}>
                   {id !== activeImg.id && (
@@ -206,7 +207,7 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
           </div>
 
           {/* Right  */}
-          <div className="w-1/2 py-10 px-20 space-y-5 relative">
+          <div className="w-full md:w-1/2 py-10 lg:px-20 space-y-5 relative">
             <p className="text-sm font-semibold text-darkOrange capitalize">
               100% clothing t-shirt
             </p>
@@ -243,7 +244,7 @@ const SoloProduct: React.FunctionComponent<ISoloProductProps> = (props) => {
             </div>
 
             {/* colors  */}
-            <div className="flex gap-x-5">
+            <div className="flex gap-x-5 flex-wrap gap-y-4">
               {colorArr.map((items, index) => (
                 <div className="space-y-2 cursor-pointer" key={index}>
                   <div

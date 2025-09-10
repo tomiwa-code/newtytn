@@ -36,7 +36,7 @@ const GoodsForYou: React.FunctionComponent<IGoodsForYouProps> = (props) => {
     },
   ];
   return (
-    <div className="px-20 py-12">
+    <div className="px-5 md:px-10 lg:px-20 py-12">
       <div className="relative flex items-center h-[100px]">
         <p className="absolute z-10 opacity-[0.04] text-8xl uppercase font-extrabold top-0">
           Goods
@@ -46,11 +46,11 @@ const GoodsForYou: React.FunctionComponent<IGoodsForYouProps> = (props) => {
         </p>
       </div>
 
-      <div className="flex gap-x-10 py-10 px-20 w-full z-20 relative">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-5 gap-x-3 md:gap-x-5 py-10 lg:px-20 w-full z-20 relative">
         {productsArr.map(({ id, imgUrl, price, title }) => (
           <Link
             href={"/shop_product/productName"}
-            className="rounded-md overflow-hidden h-[330px] relative w-[250px] bg-white text-center"
+            className="rounded-md overflow-hidden h-[330px] relative bg-white text-center"
             key={id}
           >
             <p className="absolute text-white text-sm top-6 bg-black bg-opacity-10 px-5 py-2 rounded-md capitalize w-full text-center">
