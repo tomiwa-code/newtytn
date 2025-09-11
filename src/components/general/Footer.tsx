@@ -18,7 +18,7 @@ const Footer = () => {
             whileInView={"animate"}
             viewport={{ once: true }}
             className={`bg-black rounded-t-xl md:rounded-xl h-[300px] ${
-              pathname === "/shop" && "w-[75%] left-[27%] relative"
+              pathname === "/shop" && "lg:w-[75%] lg:left-[27%] relative"
             }`}
           ></motion.div>
         </div>

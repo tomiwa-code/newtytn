@@ -98,8 +98,8 @@ const ShopContent: React.FunctionComponent<IShopContentProps> = (props) => {
   }, [searchVal]);
 
   return (
-    <div className="w-full min-h-screen bg-semiWhite pb-20 px-20 pt-32 flex">
-      <div className="border-r border-gray-300 bg-semiWhite  w-[20%] fixed h-[600px] pb-10 overflow-auto">
+    <div className="w-full min-h-screen pb-20 md:px-10 px-5 lg:px-20 pt-32 flex">
+      <div className="border-r border-gray-300 hidden lg:block w-[20%] fixed h-[600px] pb-10 overflow-auto">
         <LeftFilterBar
           handleActiveCat={handleActiveCat}
           handleActiveFilter={handleActiveFilter}
@@ -112,7 +112,7 @@ const ShopContent: React.FunctionComponent<IShopContentProps> = (props) => {
       </div>
 
       {/* Right  */}
-      <div className="w-[80%] px-10 relative left-[23%]">
+      <div className="w-full lg:w-[80%] relative lg:left-[23%]">
         {/* Link Direction  */}
         <div className="flex gap-x-3 mb-10 items-center">
           <div className="flex gap-x-3 items-center">
@@ -148,7 +148,7 @@ const ShopContent: React.FunctionComponent<IShopContentProps> = (props) => {
 
         {/* Title and sort  */}
         <div className="flex justify-between items-center mb-6">
-          <p className="text-3xl text-wheelOrange capitalize font-bold">
+          <p className="text-base md:text-3xl text-wheelOrange capitalize font-bold">
             {!activeCat ? "all products" : activeCat}
           </p>
 
@@ -208,7 +208,7 @@ const ShopContent: React.FunctionComponent<IShopContentProps> = (props) => {
           )}
         </div>
 
-        <div className="w-full flex gap-x-10 flex-wrap gap-y-12">
+        <div className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 flex-wrap gap-y-12">
           {products.map(({ link }, index) => (
             <Product key={index} link={link} text={null} />
           ))}
