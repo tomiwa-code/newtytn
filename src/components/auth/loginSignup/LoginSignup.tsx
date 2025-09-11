@@ -51,14 +51,28 @@ const LoginSignUp = () => {
       />
 
       {/* Sign up  */}
-      <div className="w-1/2 h-screen flex items-center justify-center relative">
+      <div
+        className={`w-full lg:w-1/2 h-screen flex flex-col items-center justify-center relative ${
+          !toggleAuth ? "hidden lg:block" : ""
+        }`}
+      >
+        <div className="mb-5">
+          <p className="text-4xl font-bold lg:hidden text-princetonOrange">
+            tytn
+          </p>
+        </div>
+
         {!renderCheck && userExist === "false" && (
           <SignUp handleAuthToggle={handleAuthToggle} toggleAuth={toggleAuth} />
         )}
       </div>
 
       {/* Login and User already exist */}
-      <div className="w-1/2 h-screen flex items-center justify-center relative">
+      <div
+        className={`w-full lg:w-1/2 h-screen flex items-center justify-center relative ${
+          toggleAuth ? "hidden lg:block" : ""
+        }`}
+      >
         {renderCheck && userExist === "false" && (
           <LoginCheck token={token ? token : ""} />
         )}
@@ -90,7 +104,18 @@ const LoginSignUp = () => {
         )}
 
         {!renderCheck && userExist === "false" && (
-          <Login handleAuthToggle={handleAuthToggle} toggleAuth={toggleAuth} />
+          <div className="flex-col gap-y-4 flex items-center justify-center">
+            <div className="mb-5">
+              <p className="text-4xl font-bold lg:hidden text-princetonOrange">
+                tytn
+              </p>
+            </div>
+
+            <Login
+              handleAuthToggle={handleAuthToggle}
+              toggleAuth={toggleAuth}
+            />
+          </div>
         )}
       </div>
     </div>

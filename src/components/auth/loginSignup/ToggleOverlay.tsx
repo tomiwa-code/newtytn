@@ -13,7 +13,7 @@ const ToggleOverlay = ({ toggleAuth }: HandleAuthProps) => {
         stiffness: 100,
         damping: 15,
       }}
-      className="absolute w-1/2 h-screen overflow-hidden before:inset-0 before:absolute before:bg-princetonOrange before:bg-opacity-80 before:z-20"
+      className="absolute w-1/2 h-screen overflow-hidden before:inset-0 hidden lg:block before:absolute before:bg-princetonOrange before:bg-opacity-80 before:z-20"
     >
       <Image
         src={
